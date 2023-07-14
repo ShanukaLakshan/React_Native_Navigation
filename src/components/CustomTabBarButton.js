@@ -38,7 +38,7 @@ const CustomTabBarButton = props => {
           activeOpacity={1}
           onPress={onPress}
           style={[styles.activeBtn]}>
-          <Text>{children}</Text>
+          <Text style={styles.activeText}>{children}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -54,7 +54,7 @@ const CustomTabBarButton = props => {
             borderTopRightRadius: route === 'settings' ? 10 : 0,
           },
         ]}>
-        <Text>{children}</Text>
+        <Text style={styles.inactiveText}>{children}</Text>
       </TouchableOpacity>
     );
   }
@@ -68,22 +68,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   activeBtn: {
-    flex: 1,
     position: 'absolute',
-    top: -22,
-    width: 50,
-    height: 50,
-    borderRadius: 50 / 2,
-    backgroundColor: COLORS.white,
+    top: -30,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: COLORS.primary,
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 5,
   },
+  activeText: {
+    color: COLORS.white,
+    fontSize: 12,
+  },
   inactiveBtn: {
-    flex: 1,
     backgroundColor: COLORS.white,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  inactiveText: {
+    color: COLORS.dark,
+    fontSize: 12,
   },
   svgGapFiller: {
     flex: 1,

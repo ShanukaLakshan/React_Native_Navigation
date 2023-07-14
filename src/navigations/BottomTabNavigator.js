@@ -1,13 +1,13 @@
 import React from 'react';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
 import {COLORS, ROUTES} from '../constants';
 import {Home, Wallet, Notifications, Settings} from '../screens';
-import Icon from 'react-native-vector-icons/Ionicons';
 import SettingsNavigator from './SettingsNavigator';
 import CustomTabBarButton from '../components/CustomTabBarButton';
-import CustomTabBar from '../components/CustomTabBar';
 import {useNavigation} from '@react-navigation/native';
+
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -22,20 +22,28 @@ function BottomTabNavigator() {
         headerShown: false,
         tabBarIcon: ({color, focused}) => {
           let iconName;
+          let label;
 
           if (route.name === ROUTES.HOME_TAB) {
-            iconName = focused ? 'ios-home-sharp' : 'ios-home-outline';
+            iconName = focused ? 'home' : 'home';
+            label = 'Home';
           } else if (route.name === ROUTES.SETTINGS_NAVIGATOR) {
-            iconName = focused ? 'settings' : 'settings-outline';
+            iconName = focused ? 'cogs' : 'cogs';
+            label = 'Settings';
           } else if (route.name === ROUTES.WALLET) {
-            iconName = focused ? 'wallet' : 'wallet-outline';
+            iconName = focused ? 'credit-card' : 'credit-card';
+            label = 'Wallet';
           } else if (route.name === ROUTES.NOTIFICATIONS) {
-            iconName = focused
-              ? 'md-notifications-sharp'
-              : 'md-notifications-outline';
+            iconName = focused ? 'bell' : 'bell';
+            label = 'Notifications';
           }
 
-          return <Icon name={iconName} size={22} color={color} />;
+          return (
+            <View style={styles.tabIconContainer}>
+              <FontAwesome name={iconName} size={22} color={color} />
+              <Text style={[styles.tabLabel, {color}]}>{label}</Text>
+            </View>
+          );
         },
       })}>
       <Tab.Screen
@@ -63,17 +71,14 @@ function BottomTabNavigator() {
         name={ROUTES.SETTINGS_NAVIGATOR}
         component={SettingsNavigator}
         options={{
-          tabBarLabel: 'Settings',
-          title: 'Settings',
-          headerShown: true,
           tabBarButton: props => (
             <CustomTabBarButton route="settings" {...props} />
           ),
           headerRight: () => {
             return (
               <TouchableOpacity onPress={() => navigation.openDrawer()}>
-                <Icon
-                  name={Platform.OS === 'ios' ? 'ios-menu' : 'md-menu'}
+                <FontAwesome
+                  name={Platform.OS === 'ios' ? 'bars' : 'bars'}
                   size={30}
                   color={COLORS.dark}
                   style={{marginRight: 10}}
@@ -94,5 +99,13 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.transparent,
     borderTopWidth: 0,
     height: 92,
+  },
+  tabIconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tabLabel: {
+    fontSize: 10,
+    marginTop: 2,
   },
 });
