@@ -20,7 +20,7 @@ const Login = props => {
       <View style={styles.container}>
         <View style={styles.wFull}>
           <View style={styles.row}>
-            <Text style={styles.brandName}>Colors</Text>
+            <Text style={styles.brandName}>Welcome TO ...</Text>
           </View>
 
           <Text style={styles.loginContinueTxt}>Login in to continue</Text>

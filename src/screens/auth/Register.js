@@ -1,5 +1,6 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Register = () => {
   return (
@@ -10,6 +11,7 @@ const Register = () => {
         alignItems: 'center',
       }}>
       <Text>Register</Text>
+      {/* Add Register Icon */}
     </SafeAreaView>
   );
 };
